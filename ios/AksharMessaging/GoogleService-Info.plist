@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBM7-CZu78PV4MNKsd7aA_Lp5dQMRbhvtY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>676840716265</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.akshar.messaging</string>
+	<key>PROJECT_ID</key>
+	<string>akshar-messaging</string>
+	<key>STORAGE_BUCKET</key>
+	<string>akshar-messaging.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:676840716265:ios:0ec3bbca95b4988ecebd78</string>
+</dict>
+</plist>

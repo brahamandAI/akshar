@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.akshar.messaging.app-mergeDebugResources-72:/values-v18/values-v18.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Dell\\.gradle\\caches\\transforms-3\\d40ebff7754cf3f5cc9e062d53421629\\transformed\\appcompat-1.6.1\\res\\values-v18\\values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                }
+            ]
+        }
+    ]
+}

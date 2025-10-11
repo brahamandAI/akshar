@@ -1,0 +1,62 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '14.0'
+
+target 'AksharMessaging' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for AksharMessaging
+  
+  # Firebase
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Analytics'
+  
+  # Socket.IO
+  pod 'Socket.IO-Client-Swift', '~> 16.0'
+  
+  # Networking
+  pod 'Alamofire', '~> 5.8'
+  
+  # Image Loading
+  pod 'SDWebImageSwiftUI', '~> 2.0'
+  
+  # JSON Parsing
+  pod 'SwiftyJSON', '~> 5.0'
+  
+  # Keychain
+  pod 'KeychainSwift', '~> 20.0'
+  
+  # Permissions
+  pod 'PermissionsSwiftUI', '~> 1.0'
+  
+  # Audio/Video
+  pod 'WebRTC-lib', '~> 1.1'
+  
+  # Date/Time
+  pod 'SwiftDate', '~> 7.0'
+  
+  # Crypto
+  pod 'CryptoSwift', '~> 1.8'
+
+  target 'AksharMessagingTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'AksharMessagingUITests' do
+    # Pods for testing
+  end
+
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
+      
+      # Fix for Xcode 14
+      config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO'
+    end
+  end
+end

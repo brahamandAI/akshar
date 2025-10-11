@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">676840716265</string>
+    <string name="google_api_key" translatable="false">AIzaSyDNYFJtL4pmtwlOewUxTitx-j1fJfFtyfY</string>
+    <string name="google_app_id" translatable="false">1:676840716265:android:fcba629aae8d2e4fcebd78</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDNYFJtL4pmtwlOewUxTitx-j1fJfFtyfY</string>
+    <string name="google_storage_bucket" translatable="false">akshar-messaging.firebasestorage.app</string>
+    <string name="project_id" translatable="false">akshar-messaging</string>
+</resources>

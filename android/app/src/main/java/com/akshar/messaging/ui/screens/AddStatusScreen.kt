@@ -1,0 +1,230 @@
+package com.akshar.messaging.ui.screens
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun AddStatusScreen(
+    onNavigateBack: () -> Unit,
+    onNavigateToTextStatus: () -> Unit,
+    onNavigateToMusicStatus: () -> Unit,
+    onNavigateToLayoutStatus: () -> Unit,
+    onNavigateToVoiceStatus: () -> Unit
+) {
+    val recentItems = remember {
+        listOf(
+            StatusItem("Camera", Icons.Default.CameraAlt, Color(0xFF2E7D32)),
+            StatusItem("Document Verification", Icons.Default.Description, Color.White),
+            StatusItem("Account Settings", Icons.Default.Settings, Color(0xFF2E7D32)),
+            StatusItem("New community", Icons.Default.Group, Color(0xFF2E7D32)),
+            StatusItem("WE ARE HIRING", Icons.Default.Work, Color.Yellow),
+            StatusItem("Call Log", Icons.Default.Phone, Color(0xFF2E7D32)),
+            StatusItem("Google Pay", Icons.Default.Payment, Color(0xFF2E7D32)),
+            StatusItem("Trip Complete", Icons.Default.DirectionsCar, Color.White)
+        )
+    }
+    
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { 
+                    Text(
+                        "Add status",
+                        style = MaterialTheme.typography.headlineSmall,
+                        fontWeight = FontWeight.Normal,
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = onNavigateBack) {
+                        Icon(Icons.Default.Close, contentDescription = "Close")
+                    }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color(0xFF1F1F1F),
+                    titleContentColor = Color.White,
+                    navigationIconContentColor = Color.White
+                )
+            )
+        },
+        containerColor = Color(0xFF1F1F1F)
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues)
+                .padding(16.dp)
+        ) {
+            // Status Creation Options
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                StatusOption(
+                    icon = Icons.Default.Edit,
+                    text = "Text",
+                    onClick = onNavigateToTextStatus,
+                    modifier = Modifier.weight(1f)
+                )
+                StatusOption(
+                    icon = Icons.Default.MusicNote,
+                    text = "Music",
+                    onClick = onNavigateToMusicStatus,
+                    modifier = Modifier.weight(1f)
+                )
+                StatusOption(
+                    icon = Icons.Default.GridView,
+                    text = "Layout",
+                    onClick = onNavigateToLayoutStatus,
+                    modifier = Modifier.weight(1f)
+                )
+                StatusOption(
+                    icon = Icons.Default.Mic,
+                    text = "Voice",
+                    onClick = onNavigateToVoiceStatus,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+            
+            // Recents Section
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = "Recents",
+                    style = MaterialTheme.typography.titleMedium,
+                    fontWeight = FontWeight.Medium,
+                    color = Color.White
+                )
+                Icon(
+                    Icons.Default.KeyboardArrowDown,
+                    contentDescription = "Expand",
+                    tint = Color.White,
+                    modifier = Modifier.padding(start = 8.dp)
+                )
+            }
+            
+            // Recent Items Grid
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(3),
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(vertical = 8.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(recentItems) { item ->
+                    RecentStatusItem(item = item)
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun StatusOption(
+    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        modifier = modifier
+            .height(80.dp)
+            .clickable { onClick() },
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFF2E7D32)
+        ),
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                icon,
+                contentDescription = text,
+                tint = Color.White,
+                modifier = Modifier.size(24.dp)
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            Text(
+                text = text,
+                style = MaterialTheme.typography.bodySmall,
+                color = Color.White,
+                fontWeight = FontWeight.Medium
+            )
+        }
+    }
+}
+
+@Composable
+fun RecentStatusItem(item: StatusItem) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(1f)
+            .clickable { /* TODO: Handle item click */ },
+        colors = CardDefaults.cardColors(
+            containerColor = item.backgroundColor
+        ),
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Icon(
+                    item.icon,
+                    contentDescription = item.title,
+                    tint = if (item.backgroundColor == Color.White) Color.Black else Color.White,
+                    modifier = Modifier.size(32.dp)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                Text(
+                    text = item.title,
+                    style = MaterialTheme.typography.bodySmall,
+                    color = if (item.backgroundColor == Color.White) Color.Black else Color.White,
+                    fontWeight = FontWeight.Medium,
+                    textAlign = TextAlign.Center,
+                    maxLines = 2,
+                    modifier = Modifier.padding(horizontal = 4.dp)
+                )
+            }
+        }
+    }
+}
+
+data class StatusItem(
+    val title: String,
+    val icon: androidx.compose.ui.graphics.vector.ImageVector,
+    val backgroundColor: Color
+)

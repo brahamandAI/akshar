@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "676840716265",
+    "project_id": "akshar-messaging",
+    "storage_bucket": "akshar-messaging.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676840716265:android:fcba629aae8d2e4fcebd78",
+        "android_client_info": {
+          "package_name": "com.akshar.messaging"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNYFJtL4pmtwlOewUxTitx-j1fJfFtyfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
