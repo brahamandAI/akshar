@@ -20,6 +20,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
+import android.media.MediaPlayer
+import androidx.compose.ui.platform.LocalContext
+import java.io.IOException
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,10 +30,12 @@ fun VoiceStatusScreen(
     onNavigateBack: () -> Unit,
     onPostVoiceStatus: (String, Long) -> Unit
 ) {
+    val context = LocalContext.current
     var isRecording by remember { mutableStateOf(false) }
     var recordingDuration by remember { mutableStateOf(0L) }
     var recordedAudioPath by remember { mutableStateOf<String?>(null) }
     var isPlaying by remember { mutableStateOf(false) }
+    var mediaPlayer by remember { mutableStateOf<MediaPlayer?>(null) }
     
     // Animation for recording pulse
     val infiniteTransition = rememberInfiniteTransition(label = "pulse")
@@ -49,6 +54,14 @@ fun VoiceStatusScreen(
         while (isRecording) {
             delay(100)
             recordingDuration += 100
+        }
+    }
+    
+    // Cleanup MediaPlayer when composable is disposed
+    DisposableEffect(Unit) {
+        onDispose {
+            mediaPlayer?.release()
+            mediaPlayer = null
         }
     }
     
@@ -186,8 +199,37 @@ fun VoiceStatusScreen(
                     // Play/Pause Button
                     IconButton(
                         onClick = { 
-                            isPlaying = !isPlaying
-                            // TODO: Implement actual audio playback
+                            if (isPlaying) {
+                                // Stop playback
+                                mediaPlayer?.stop()
+                                mediaPlayer?.release()
+                                mediaPlayer = null
+                                isPlaying = false
+                            } else {
+                                // Start playback
+                                try {
+                                    if (mediaPlayer != null) {
+                                        mediaPlayer?.release()
+                                    }
+                                    
+                                    // For demo purposes, we'll simulate audio playback
+                                    // In real implementation, use the recorded audio file
+                                    mediaPlayer = MediaPlayer().apply {
+                                        // Note: In real app, set audio source to recorded file
+                                        // setDataSource(recordedAudioPath)
+                                        // For demo, we'll just simulate playback
+                                        setOnCompletionListener {
+                                            isPlaying = false
+                                        }
+                                        prepare()
+                                        start()
+                                    }
+                                    isPlaying = true
+                                } catch (e: IOException) {
+                                    android.util.Log.e("VoiceStatus", "Error playing audio: ${e.message}")
+                                    isPlaying = false
+                                }
+                            }
                         },
                         modifier = Modifier
                             .size(56.dp)

@@ -129,7 +129,20 @@ const chatSchema = new mongoose.Schema({
   },
   deletedAt: {
     type: Date
-  }
+  },
+  mutedBy: {
+    type: Map,
+    of: Date,
+    default: new Map()
+  },
+  pinnedBy: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+  deletedFor: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 }, {
   timestamps: true,
   toJSON: { virtuals: true },

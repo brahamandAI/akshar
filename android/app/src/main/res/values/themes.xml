@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme -->
+    <style name="Theme.AksharMessaging" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/akshar_primary</item>
+        <item name="colorPrimaryDark">@color/akshar_primary_dark</item>
+        <item name="colorAccent">@color/akshar_accent</item>
+        <item name="android:statusBarColor">@color/akshar_background</item>
+        <item name="android:navigationBarColor">@color/akshar_background</item>
+    </style>
+
+    <!-- Splash Screen Theme for Android 12+ -->
+    <style name="Theme.AksharMessaging.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/akshar_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.AksharMessaging</item>
+    </style>
+
+    <!-- Call Activity Theme -->
+    <style name="Theme.AksharMessaging.Call" parent="Theme.AksharMessaging">
+        <item name="android:windowBackground">@color/black</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+</resources>
+

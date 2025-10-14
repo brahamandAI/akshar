@@ -204,8 +204,8 @@
 108-->C:\Users\Dell\Downloads\Akshar_Messaging\android\app\src\main\AndroidManifest.xml:70:13-43
 109            android:screenOrientation="portrait"
 109-->C:\Users\Dell\Downloads\Akshar_Messaging\android\app\src\main\AndroidManifest.xml:69:13-49
-110            android:theme="@style/Theme.AksharMessaging" >
-110-->C:\Users\Dell\Downloads\Akshar_Messaging\android\app\src\main\AndroidManifest.xml:68:13-57
+110            android:theme="@style/Theme.AksharMessaging.Splash" >
+110-->C:\Users\Dell\Downloads\Akshar_Messaging\android\app\src\main\AndroidManifest.xml:68:13-64
 111            <intent-filter>
 111-->C:\Users\Dell\Downloads\Akshar_Messaging\android\app\src\main\AndroidManifest.xml:71:13-74:29
 112                <action android:name="android.intent.action.MAIN" />
@@ -554,142 +554,152 @@
 300-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Dell\.gradle\caches\transforms-3\cdcd5c02752de200891562f8ad4af8f5\transformed\play-services-base-18.0.1\AndroidManifest.xml:22:19-43
 301            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 301-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\Dell\.gradle\caches\transforms-3\cdcd5c02752de200891562f8ad4af8f5\transformed\play-services-base-18.0.1\AndroidManifest.xml:21:19-78
-302        <activity
-302-->[androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\Dell\.gradle\caches\transforms-3\a50c1fa81151a1c97e69c9aa2ef45895\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
-303            android:name="androidx.compose.ui.tooling.PreviewActivity"
-303-->[androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\Dell\.gradle\caches\transforms-3\a50c1fa81151a1c97e69c9aa2ef45895\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
-304            android:exported="true" />
-304-->[androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\Dell\.gradle\caches\transforms-3\a50c1fa81151a1c97e69c9aa2ef45895\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
-305        <activity
-305-->[androidx.compose.ui:ui-test-manifest:1.5.4] C:\Users\Dell\.gradle\caches\transforms-3\a3019dac9be20c15a1a510484a8d64f2\transformed\ui-test-manifest-1.5.4\AndroidManifest.xml:23:9-25:39
-306            android:name="androidx.activity.ComponentActivity"
-306-->[androidx.compose.ui:ui-test-manifest:1.5.4] C:\Users\Dell\.gradle\caches\transforms-3\a3019dac9be20c15a1a510484a8d64f2\transformed\ui-test-manifest-1.5.4\AndroidManifest.xml:24:13-63
-307            android:exported="true" />
-307-->[androidx.compose.ui:ui-test-manifest:1.5.4] C:\Users\Dell\.gradle\caches\transforms-3\a3019dac9be20c15a1a510484a8d64f2\transformed\ui-test-manifest-1.5.4\AndroidManifest.xml:25:13-36
-308
-309        <provider
-309-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Dell\.gradle\caches\transforms-3\04de1defd6e53c9aeee290e6debf3cb2\transformed\emoji2-1.4.0\AndroidManifest.xml:24:9-32:20
-310            android:name="androidx.startup.InitializationProvider"
-310-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Dell\.gradle\caches\transforms-3\04de1defd6e53c9aeee290e6debf3cb2\transformed\emoji2-1.4.0\AndroidManifest.xml:25:13-67
-311            android:authorities="com.akshar.messaging.androidx-startup"
-311-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Dell\.gradle\caches\transforms-3\04de1defd6e53c9aeee290e6debf3cb2\transformed\emoji2-1.4.0\AndroidManifest.xml:26:13-68
-312            android:exported="false" >
-312-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Dell\.gradle\caches\transforms-3\04de1defd6e53c9aeee290e6debf3cb2\transformed\emoji2-1.4.0\AndroidManifest.xml:27:13-37
-313            <meta-data
-313-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Dell\.gradle\caches\transforms-3\04de1defd6e53c9aeee290e6debf3cb2\transformed\emoji2-1.4.0\AndroidManifest.xml:29:13-31:52
-314                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-314-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Dell\.gradle\caches\transforms-3\04de1defd6e53c9aeee290e6debf3cb2\transformed\emoji2-1.4.0\AndroidManifest.xml:30:17-75
-315                android:value="androidx.startup" />
-315-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Dell\.gradle\caches\transforms-3\04de1defd6e53c9aeee290e6debf3cb2\transformed\emoji2-1.4.0\AndroidManifest.xml:31:17-49
-316            <meta-data
-316-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Dell\.gradle\caches\transforms-3\25e96a6aae6285dfb029a85072463a00\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
-317                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-317-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Dell\.gradle\caches\transforms-3\25e96a6aae6285dfb029a85072463a00\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
-318                android:value="androidx.startup" />
-318-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Dell\.gradle\caches\transforms-3\25e96a6aae6285dfb029a85072463a00\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
+302
+303        <service
+303-->[androidx.room:room-runtime:2.6.1] C:\Users\Dell\.gradle\caches\transforms-3\5eabb3f8a6bcfcc9fb8fa8c30c34657f\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
+304            android:name="androidx.room.MultiInstanceInvalidationService"
+304-->[androidx.room:room-runtime:2.6.1] C:\Users\Dell\.gradle\caches\transforms-3\5eabb3f8a6bcfcc9fb8fa8c30c34657f\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
+305            android:directBootAware="true"
+305-->[androidx.room:room-runtime:2.6.1] C:\Users\Dell\.gradle\caches\transforms-3\5eabb3f8a6bcfcc9fb8fa8c30c34657f\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
+306            android:exported="false" />
+306-->[androidx.room:room-runtime:2.6.1] C:\Users\Dell\.gradle\caches\transforms-3\5eabb3f8a6bcfcc9fb8fa8c30c34657f\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
+307
+308        <activity
+308-->[androidx.compose.ui:ui-test-manifest:1.5.4] C:\Users\Dell\.gradle\caches\transforms-3\a3019dac9be20c15a1a510484a8d64f2\transformed\ui-test-manifest-1.5.4\AndroidManifest.xml:23:9-25:39
+309            android:name="androidx.activity.ComponentActivity"
+309-->[androidx.compose.ui:ui-test-manifest:1.5.4] C:\Users\Dell\.gradle\caches\transforms-3\a3019dac9be20c15a1a510484a8d64f2\transformed\ui-test-manifest-1.5.4\AndroidManifest.xml:24:13-63
+310            android:exported="true" />
+310-->[androidx.compose.ui:ui-test-manifest:1.5.4] C:\Users\Dell\.gradle\caches\transforms-3\a3019dac9be20c15a1a510484a8d64f2\transformed\ui-test-manifest-1.5.4\AndroidManifest.xml:25:13-36
+311        <activity
+311-->[androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\Dell\.gradle\caches\transforms-3\a50c1fa81151a1c97e69c9aa2ef45895\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
+312            android:name="androidx.compose.ui.tooling.PreviewActivity"
+312-->[androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\Dell\.gradle\caches\transforms-3\a50c1fa81151a1c97e69c9aa2ef45895\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
+313            android:exported="true" />
+313-->[androidx.compose.ui:ui-tooling-android:1.5.4] C:\Users\Dell\.gradle\caches\transforms-3\a50c1fa81151a1c97e69c9aa2ef45895\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
+314
+315        <provider
+315-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Dell\.gradle\caches\transforms-3\04de1defd6e53c9aeee290e6debf3cb2\transformed\emoji2-1.4.0\AndroidManifest.xml:24:9-32:20
+316            android:name="androidx.startup.InitializationProvider"
+316-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Dell\.gradle\caches\transforms-3\04de1defd6e53c9aeee290e6debf3cb2\transformed\emoji2-1.4.0\AndroidManifest.xml:25:13-67
+317            android:authorities="com.akshar.messaging.androidx-startup"
+317-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Dell\.gradle\caches\transforms-3\04de1defd6e53c9aeee290e6debf3cb2\transformed\emoji2-1.4.0\AndroidManifest.xml:26:13-68
+318            android:exported="false" >
+318-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Dell\.gradle\caches\transforms-3\04de1defd6e53c9aeee290e6debf3cb2\transformed\emoji2-1.4.0\AndroidManifest.xml:27:13-37
 319            <meta-data
-319-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
-320                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-320-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+319-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Dell\.gradle\caches\transforms-3\04de1defd6e53c9aeee290e6debf3cb2\transformed\emoji2-1.4.0\AndroidManifest.xml:29:13-31:52
+320                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+320-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Dell\.gradle\caches\transforms-3\04de1defd6e53c9aeee290e6debf3cb2\transformed\emoji2-1.4.0\AndroidManifest.xml:30:17-75
 321                android:value="androidx.startup" />
-321-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
-322        </provider>
-323
-324        <uses-library
-324-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\Dell\.gradle\caches\transforms-3\388935a87c17403a95de5d6489944691\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:23:9-25:40
-325            android:name="android.ext.adservices"
-325-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\Dell\.gradle\caches\transforms-3\388935a87c17403a95de5d6489944691\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:24:13-50
-326            android:required="false" />
-326-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\Dell\.gradle\caches\transforms-3\388935a87c17403a95de5d6489944691\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:25:13-37
-327
-328        <meta-data
-328-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\Dell\.gradle\caches\transforms-3\2040bbc610346fdfe76ccd6ade7b298b\transformed\play-services-basement-18.3.0\AndroidManifest.xml:21:9-23:69
-329            android:name="com.google.android.gms.version"
-329-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\Dell\.gradle\caches\transforms-3\2040bbc610346fdfe76ccd6ade7b298b\transformed\play-services-basement-18.3.0\AndroidManifest.xml:22:13-58
-330            android:value="@integer/google_play_services_version" />
-330-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\Dell\.gradle\caches\transforms-3\2040bbc610346fdfe76ccd6ade7b298b\transformed\play-services-basement-18.3.0\AndroidManifest.xml:23:13-66
-331
-332        <service
-332-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\de18d9e7fa056bd2864dfda04e6595d8\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:28:9-34:19
-333            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
-333-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\de18d9e7fa056bd2864dfda04e6595d8\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:29:13-103
-334            android:exported="false" >
-334-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\de18d9e7fa056bd2864dfda04e6595d8\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:30:13-37
-335            <meta-data
-335-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\de18d9e7fa056bd2864dfda04e6595d8\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:31:13-33:39
-336                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
-336-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\de18d9e7fa056bd2864dfda04e6595d8\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:32:17-94
-337                android:value="cct" />
-337-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\de18d9e7fa056bd2864dfda04e6595d8\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:33:17-36
-338        </service>
-339        <service
-339-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\7ba9fc03c97d5c424cad86c2281f332f\transformed\transport-runtime-3.1.9\AndroidManifest.xml:26:9-30:19
-340            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
-340-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\7ba9fc03c97d5c424cad86c2281f332f\transformed\transport-runtime-3.1.9\AndroidManifest.xml:27:13-117
-341            android:exported="false"
-341-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\7ba9fc03c97d5c424cad86c2281f332f\transformed\transport-runtime-3.1.9\AndroidManifest.xml:28:13-37
-342            android:permission="android.permission.BIND_JOB_SERVICE" >
-342-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\7ba9fc03c97d5c424cad86c2281f332f\transformed\transport-runtime-3.1.9\AndroidManifest.xml:29:13-69
-343        </service>
-344
-345        <receiver
-345-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\7ba9fc03c97d5c424cad86c2281f332f\transformed\transport-runtime-3.1.9\AndroidManifest.xml:32:9-34:40
-346            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
-346-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\7ba9fc03c97d5c424cad86c2281f332f\transformed\transport-runtime-3.1.9\AndroidManifest.xml:33:13-132
-347            android:exported="false" />
-347-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\7ba9fc03c97d5c424cad86c2281f332f\transformed\transport-runtime-3.1.9\AndroidManifest.xml:34:13-37
-348        <receiver
-348-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
-349            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-349-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
-350            android:directBootAware="false"
-350-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
-351            android:enabled="true"
-351-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
-352            android:exported="true"
-352-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
-353            android:permission="android.permission.DUMP" >
-353-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
-354            <intent-filter>
-354-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
-355                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-355-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
-355-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
-356            </intent-filter>
-357            <intent-filter>
-357-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
-358                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-358-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
-358-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
-359            </intent-filter>
+321-->[androidx.emoji2:emoji2:1.4.0] C:\Users\Dell\.gradle\caches\transforms-3\04de1defd6e53c9aeee290e6debf3cb2\transformed\emoji2-1.4.0\AndroidManifest.xml:31:17-49
+322            <meta-data
+322-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Dell\.gradle\caches\transforms-3\25e96a6aae6285dfb029a85072463a00\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:29:13-31:52
+323                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+323-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Dell\.gradle\caches\transforms-3\25e96a6aae6285dfb029a85072463a00\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:30:17-78
+324                android:value="androidx.startup" />
+324-->[androidx.lifecycle:lifecycle-process:2.7.0] C:\Users\Dell\.gradle\caches\transforms-3\25e96a6aae6285dfb029a85072463a00\transformed\lifecycle-process-2.7.0\AndroidManifest.xml:31:17-49
+325            <meta-data
+325-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+326                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+326-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+327                android:value="androidx.startup" />
+327-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+328        </provider>
+329
+330        <uses-library
+330-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\Dell\.gradle\caches\transforms-3\388935a87c17403a95de5d6489944691\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:23:9-25:40
+331            android:name="android.ext.adservices"
+331-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\Dell\.gradle\caches\transforms-3\388935a87c17403a95de5d6489944691\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:24:13-50
+332            android:required="false" />
+332-->[androidx.privacysandbox.ads:ads-adservices:1.0.0-beta05] C:\Users\Dell\.gradle\caches\transforms-3\388935a87c17403a95de5d6489944691\transformed\ads-adservices-1.0.0-beta05\AndroidManifest.xml:25:13-37
+333
+334        <meta-data
+334-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\Dell\.gradle\caches\transforms-3\2040bbc610346fdfe76ccd6ade7b298b\transformed\play-services-basement-18.3.0\AndroidManifest.xml:21:9-23:69
+335            android:name="com.google.android.gms.version"
+335-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\Dell\.gradle\caches\transforms-3\2040bbc610346fdfe76ccd6ade7b298b\transformed\play-services-basement-18.3.0\AndroidManifest.xml:22:13-58
+336            android:value="@integer/google_play_services_version" />
+336-->[com.google.android.gms:play-services-basement:18.3.0] C:\Users\Dell\.gradle\caches\transforms-3\2040bbc610346fdfe76ccd6ade7b298b\transformed\play-services-basement-18.3.0\AndroidManifest.xml:23:13-66
+337
+338        <service
+338-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\de18d9e7fa056bd2864dfda04e6595d8\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:28:9-34:19
+339            android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery"
+339-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\de18d9e7fa056bd2864dfda04e6595d8\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:29:13-103
+340            android:exported="false" >
+340-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\de18d9e7fa056bd2864dfda04e6595d8\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:30:13-37
+341            <meta-data
+341-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\de18d9e7fa056bd2864dfda04e6595d8\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:31:13-33:39
+342                android:name="backend:com.google.android.datatransport.cct.CctBackendFactory"
+342-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\de18d9e7fa056bd2864dfda04e6595d8\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:32:17-94
+343                android:value="cct" />
+343-->[com.google.android.datatransport:transport-backend-cct:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\de18d9e7fa056bd2864dfda04e6595d8\transformed\transport-backend-cct-3.1.9\AndroidManifest.xml:33:17-36
+344        </service>
+345        <service
+345-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\7ba9fc03c97d5c424cad86c2281f332f\transformed\transport-runtime-3.1.9\AndroidManifest.xml:26:9-30:19
+346            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService"
+346-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\7ba9fc03c97d5c424cad86c2281f332f\transformed\transport-runtime-3.1.9\AndroidManifest.xml:27:13-117
+347            android:exported="false"
+347-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\7ba9fc03c97d5c424cad86c2281f332f\transformed\transport-runtime-3.1.9\AndroidManifest.xml:28:13-37
+348            android:permission="android.permission.BIND_JOB_SERVICE" >
+348-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\7ba9fc03c97d5c424cad86c2281f332f\transformed\transport-runtime-3.1.9\AndroidManifest.xml:29:13-69
+349        </service>
+350
+351        <receiver
+351-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\7ba9fc03c97d5c424cad86c2281f332f\transformed\transport-runtime-3.1.9\AndroidManifest.xml:32:9-34:40
+352            android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"
+352-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\7ba9fc03c97d5c424cad86c2281f332f\transformed\transport-runtime-3.1.9\AndroidManifest.xml:33:13-132
+353            android:exported="false" />
+353-->[com.google.android.datatransport:transport-runtime:3.1.9] C:\Users\Dell\.gradle\caches\transforms-3\7ba9fc03c97d5c424cad86c2281f332f\transformed\transport-runtime-3.1.9\AndroidManifest.xml:34:13-37
+354        <receiver
+354-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+355            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+355-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+356            android:directBootAware="false"
+356-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+357            android:enabled="true"
+357-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+358            android:exported="true"
+358-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+359            android:permission="android.permission.DUMP" >
+359-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
 360            <intent-filter>
-360-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
-361                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-361-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
-361-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+360-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+361                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+361-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+361-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
 362            </intent-filter>
 363            <intent-filter>
-363-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
-364                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-364-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
-364-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+363-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+364                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+364-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+364-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
 365            </intent-filter>
-366        </receiver>
-367
-368        <activity
-368-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\transforms-3\3249bdae28a9fda5fa88ca6a8a513418\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:47:9-53:63
-369            android:name="com.journeyapps.barcodescanner.CaptureActivity"
-369-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\transforms-3\3249bdae28a9fda5fa88ca6a8a513418\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
-370            android:clearTaskOnLaunch="true"
-370-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\transforms-3\3249bdae28a9fda5fa88ca6a8a513418\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:49:13-45
-371            android:screenOrientation="sensorLandscape"
-371-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\transforms-3\3249bdae28a9fda5fa88ca6a8a513418\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:50:13-56
-372            android:stateNotNeeded="true"
-372-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\transforms-3\3249bdae28a9fda5fa88ca6a8a513418\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:51:13-42
-373            android:theme="@style/zxing_CaptureTheme"
-373-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\transforms-3\3249bdae28a9fda5fa88ca6a8a513418\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
-374            android:windowSoftInputMode="stateAlwaysHidden" />
-374-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\transforms-3\3249bdae28a9fda5fa88ca6a8a513418\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:53:13-60
-375    </application>
-376
-377</manifest>
+366            <intent-filter>
+366-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+367                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+367-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+367-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+368            </intent-filter>
+369            <intent-filter>
+369-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+370                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+370-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+370-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Dell\.gradle\caches\transforms-3\8163c07dbe890daac44e6ae715abc039\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+371            </intent-filter>
+372        </receiver>
+373
+374        <activity
+374-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\transforms-3\3249bdae28a9fda5fa88ca6a8a513418\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:47:9-53:63
+375            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+375-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\transforms-3\3249bdae28a9fda5fa88ca6a8a513418\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:48:13-74
+376            android:clearTaskOnLaunch="true"
+376-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\transforms-3\3249bdae28a9fda5fa88ca6a8a513418\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:49:13-45
+377            android:screenOrientation="sensorLandscape"
+377-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\transforms-3\3249bdae28a9fda5fa88ca6a8a513418\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:50:13-56
+378            android:stateNotNeeded="true"
+378-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\transforms-3\3249bdae28a9fda5fa88ca6a8a513418\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:51:13-42
+379            android:theme="@style/zxing_CaptureTheme"
+379-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\transforms-3\3249bdae28a9fda5fa88ca6a8a513418\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:52:13-54
+380            android:windowSoftInputMode="stateAlwaysHidden" />
+380-->[com.journeyapps:zxing-android-embedded:4.3.0] C:\Users\Dell\.gradle\caches\transforms-3\3249bdae28a9fda5fa88ca6a8a513418\transformed\zxing-android-embedded-4.3.0\AndroidManifest.xml:53:13-60
+381    </application>
+382
+383</manifest>

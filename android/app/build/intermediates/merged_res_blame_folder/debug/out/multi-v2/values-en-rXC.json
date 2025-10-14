@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.akshar.messaging.app-mergeDebugResources-72:/values-en-rXC/values-en-rXC.xml",
+            "outputFile": "com.akshar.messaging.app-mergeDebugResources-85:/values-en-rXC/values-en-rXC.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Dell\\.gradle\\caches\\transforms-3\\1a95dcb002482da128555599e267b8d4\\transformed\\ui-release\\res\\values-en-rXC\\values-en-rXC.xml",

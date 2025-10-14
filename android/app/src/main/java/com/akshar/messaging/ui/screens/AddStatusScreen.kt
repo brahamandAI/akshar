@@ -8,14 +8,30 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.graphics.asImageBitmap
+import android.graphics.BitmapFactory
+import android.provider.MediaStore
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.runtime.*
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.graphics.Color
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.getValue
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.io.IOException
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -30,17 +46,14 @@ fun AddStatusScreen(
     onNavigateToLayoutStatus: () -> Unit,
     onNavigateToVoiceStatus: () -> Unit
 ) {
-    val recentItems = remember {
-        listOf(
-            StatusItem("Camera", Icons.Default.CameraAlt, Color(0xFF2E7D32)),
-            StatusItem("Document Verification", Icons.Default.Description, Color.White),
-            StatusItem("Account Settings", Icons.Default.Settings, Color(0xFF2E7D32)),
-            StatusItem("New community", Icons.Default.Group, Color(0xFF2E7D32)),
-            StatusItem("WE ARE HIRING", Icons.Default.Work, Color.Yellow),
-            StatusItem("Call Log", Icons.Default.Phone, Color(0xFF2E7D32)),
-            StatusItem("Google Pay", Icons.Default.Payment, Color(0xFF2E7D32)),
-            StatusItem("Trip Complete", Icons.Default.DirectionsCar, Color.White)
-        )
+    val context = LocalContext.current
+    var galleryImages by remember { mutableStateOf<List<String>>(emptyList()) }
+    
+    // Load gallery images
+    LaunchedEffect(Unit) {
+        galleryImages = withContext(Dispatchers.IO) {
+            loadGalleryImages(context)
+        }
     }
     
     Scaffold(
@@ -107,7 +120,7 @@ fun AddStatusScreen(
                 )
             }
             
-            // Recents Section
+            // Gallery Photos Section
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -115,29 +128,53 @@ fun AddStatusScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = "Recents",
+                    text = "Gallery Photos",
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.Medium,
                     color = Color.White
                 )
-                Icon(
-                    Icons.Default.KeyboardArrowDown,
-                    contentDescription = "Expand",
-                    tint = Color.White,
-                    modifier = Modifier.padding(start = 8.dp)
+                Spacer(modifier = Modifier.weight(1f))
+                Text(
+                    text = "${galleryImages.size} photos",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = Color.Gray
                 )
             }
             
-            // Recent Items Grid
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(3),
-                modifier = Modifier.fillMaxSize(),
-                contentPadding = PaddingValues(vertical = 8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(recentItems) { item ->
-                    RecentStatusItem(item = item)
+            // Gallery Images Grid
+            if (galleryImages.isNotEmpty()) {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(3),
+                    modifier = Modifier.fillMaxSize(),
+                    contentPadding = PaddingValues(vertical = 8.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    items(galleryImages.take(12)) { imagePath -> // Show first 12 images
+                        GalleryImageItem(imagePath = imagePath)
+                    }
+                }
+            } else {
+                // Empty state
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(32.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Icon(
+                        Icons.Default.PhotoLibrary,
+                        contentDescription = "No photos",
+                        modifier = Modifier.size(64.dp),
+                        tint = Color.Gray
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = "No photos found in gallery",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.Gray
+                    )
                 }
             }
         }
@@ -217,6 +254,81 @@ fun RecentStatusItem(item: StatusItem) {
                     textAlign = TextAlign.Center,
                     maxLines = 2,
                     modifier = Modifier.padding(horizontal = 4.dp)
+                )
+            }
+        }
+    }
+}
+
+// Gallery Image Loading Function
+private suspend fun loadGalleryImages(context: android.content.Context): List<String> {
+    return withContext(Dispatchers.IO) {
+        try {
+            val imagePaths = mutableListOf<String>()
+            val projection = arrayOf(MediaStore.Images.Media.DATA)
+            val cursor = context.contentResolver.query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                projection,
+                null,
+                null,
+                "${MediaStore.Images.Media.DATE_TAKEN} DESC"
+            )
+            
+            cursor?.use {
+                val columnIndex = it.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+                while (it.moveToNext() && imagePaths.size < 20) { // Limit to 20 images
+                    val imagePath = it.getString(columnIndex)
+                    if (imagePath != null) {
+                        imagePaths.add(imagePath)
+                    }
+                }
+            }
+            imagePaths
+        } catch (e: Exception) {
+            emptyList()
+        }
+    }
+}
+
+@Composable
+fun GalleryImageItem(imagePath: String) {
+    var bitmap by remember { mutableStateOf<android.graphics.Bitmap?>(null) }
+    
+    LaunchedEffect(imagePath) {
+        bitmap = withContext(Dispatchers.IO) {
+            try {
+                BitmapFactory.decodeFile(imagePath)
+            } catch (e: Exception) {
+                null
+            }
+        }
+    }
+    
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .aspectRatio(1f)
+            .clickable { /* TODO: Handle image selection for status */ },
+        shape = RoundedCornerShape(8.dp)
+    ) {
+        if (bitmap != null) {
+            androidx.compose.foundation.Image(
+                bitmap = bitmap!!.asImageBitmap(),
+                contentDescription = "Gallery image",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+        } else {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Gray),
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    Icons.Default.Image,
+                    contentDescription = "Loading",
+                    tint = Color.White
                 )
             }
         }

@@ -65,7 +65,7 @@
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.AksharMessaging"
+            android:theme="@style/Theme.AksharMessaging.Splash"
             android:screenOrientation="portrait"
             android:launchMode="singleTop">
             <intent-filter>

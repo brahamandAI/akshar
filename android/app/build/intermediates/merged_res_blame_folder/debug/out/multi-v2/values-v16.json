@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.akshar.messaging.app-mergeDebugResources-72:/values-v16/values-v16.xml",
+            "outputFile": "com.akshar.messaging.app-mergeDebugResources-85:/values-v16/values-v16.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Dell\\.gradle\\caches\\transforms-3\\d40ebff7754cf3f5cc9e062d53421629\\transformed\\appcompat-1.6.1\\res\\values-v16\\values-v16.xml",

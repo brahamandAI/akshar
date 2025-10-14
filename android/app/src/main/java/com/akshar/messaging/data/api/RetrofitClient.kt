@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit
 object RetrofitClient {
     
     // For physical device - Using your computer's IP
-    private const val BASE_URL = "http://10.234.138.233:3000/api/"
+    private const val BASE_URL = "http://192.168.1.4:3000/api/"
     // For Android Emulator use: "http://10.0.2.2:3000/api/"
     
     private var token: String? = null

@@ -1,0 +1,20 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.akshar.messaging.app-mergeDebugResources-85:/values-v29/values-v29.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Dell\\.gradle\\caches\\transforms-3\\a6679fe38906f32efa9a9e0622602f07\\transformed\\core-splashscreen-1.0.1\\res\\values-v29\\values-v29.xml",
+                    "from": {
+                        "startLines": "2,7",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,374",
+                        "endLines": "6,8",
+                        "endColumns": "12,12",
+                        "endOffsets": "369,464"
+                    }
+                }
+            ]
+        }
+    ]
+}

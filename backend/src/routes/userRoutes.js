@@ -562,4 +562,161 @@ router.delete('/account', authMiddleware, [
   });
 }));
 
+/**
+ * @route   PUT /api/users/settings
+ * @desc    Save user settings
+ * @access  Private
+ */
+router.put('/settings', authMiddleware, asyncHandler(async (req, res) => {
+    const {
+        theme,
+        privacy,
+        notifications,
+        chatSettings,
+        storageSettings
+    } = req.body;
+    
+    const updateData = {};
+    if (theme) updateData['settings.theme'] = theme;
+    if (privacy) {
+        Object.keys(privacy).forEach(key => {
+            updateData[`settings.privacy.${key}`] = privacy[key];
+        });
+    }
+    if (notifications) {
+        Object.keys(notifications).forEach(key => {
+            updateData[`settings.notifications.${key}`] = notifications[key];
+        });
+    }
+    if (chatSettings) {
+        Object.keys(chatSettings).forEach(key => {
+            updateData[`settings.chatSettings.${key}`] = chatSettings[key];
+        });
+    }
+    if (storageSettings) {
+        Object.keys(storageSettings).forEach(key => {
+            updateData[`settings.storageSettings.${key}`] = storageSettings[key];
+        });
+    }
+    
+    const user = await User.findByIdAndUpdate(
+        req.user._id,
+        { $set: updateData },
+        { new: true, runValidators: true }
+    );
+    
+    res.json({
+        success: true,
+        settings: user.settings
+    });
+}));
+
+/**
+ * @route   GET /api/users/settings
+ * @desc    Get user settings
+ * @access  Private
+ */
+router.get('/settings', authMiddleware, asyncHandler(async (req, res) => {
+    const user = await User.findById(req.user._id);
+    
+    res.json({
+        success: true,
+        settings: user.settings || {}
+    });
+}));
+
+/**
+ * @route   GET /api/users/account-info
+ * @desc    Get account information export
+ * @access  Private
+ */
+router.get('/account-info', authMiddleware, asyncHandler(async (req, res) => {
+    const Message = require('../models/Message');
+    const Status = require('../models/Status');
+    const Call = require('../models/Call');
+    
+    const user = await User.findById(req.user._id);
+    const chats = await Chat.countDocuments({
+        participants: req.user._id,
+        isDeleted: false
+    });
+    const messages = await Message.countDocuments({
+        sender: req.user._id
+    });
+    const statuses = await Status.countDocuments({
+        user: req.user._id
+    });
+    const calls = await Call.countDocuments({
+        $or: [
+            { caller: req.user._id },
+            { receiver: req.user._id }
+        ]
+    });
+    
+    const accountInfo = {
+        user: {
+            id: user._id,
+            name: `${user.firstName} ${user.lastName}`,
+            email: user.email,
+            username: user.username,
+            phoneNumber: user.phoneNumber,
+            createdAt: user.createdAt,
+            lastSeen: user.lastSeen
+        },
+        statistics: {
+            chats,
+            messages,
+            statuses,
+            calls
+        },
+        settings: user.settings
+    };
+    
+    res.json({
+        success: true,
+        accountInfo
+    });
+}));
+
+/**
+ * @route   PUT /api/users/change-number
+ * @desc    Change phone number
+ * @access  Private
+ */
+router.put('/change-number', authMiddleware, asyncHandler(async (req, res) => {
+    const { newPhoneNumber, password } = req.body;
+    
+    if (!newPhoneNumber || !password) {
+        throw new AppError('Phone number and password are required', 400);
+    }
+    
+    // Get user with password
+    const user = await User.findById(req.user._id).select('+password');
+    
+    // Verify password
+    const isMatch = await user.comparePassword(password);
+    if (!isMatch) {
+        throw new AppError('Invalid password', 401);
+    }
+    
+    // Check if number already exists
+    const existingUser = await User.findOne({ 
+        phoneNumber: newPhoneNumber,
+        _id: { $ne: req.user._id }
+    });
+    
+    if (existingUser) {
+        throw new AppError('Phone number already in use', 400);
+    }
+    
+    user.phoneNumber = newPhoneNumber;
+    user.isPhoneVerified = false; // Require reverification
+    await user.save();
+    
+    res.json({
+        success: true,
+        message: 'Phone number updated successfully'
+    });
+}));
+
 module.exports = router;

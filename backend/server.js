@@ -99,9 +99,17 @@ app.use('/api/users', authMiddleware, userRoutes);
 app.use('/api/chats', authMiddleware, chatRoutes);
 app.use('/api/messages', authMiddleware, messageRoutes);
 app.use('/api/status', authMiddleware, statusRoutes);
+app.use('/api/calls', require('./src/routes/callRoutes'));
+app.use('/api/devices', require('./src/routes/deviceRoutes'));
+app.use('/api/broadcasts', authMiddleware, require('./src/routes/broadcastRoutes'));
+app.use('/api/communities', authMiddleware, require('./src/routes/communityRoutes'));
 
 // Socket.IO connection handling
 socketHandler(io);
+
+// Initialize background jobs
+const { initializeStatusCleanup } = require('./src/jobs/statusCleanup');
+initializeStatusCleanup();
 
 // 404 handler
 app.use('*', (req, res) => {

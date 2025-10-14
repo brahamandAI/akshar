@@ -16,7 +16,7 @@ import java.net.URI
 object SocketManager {
     
     // For physical device - Using your computer's IP
-    private const val SERVER_URL = "http://10.234.138.233:3000"
+    private const val SERVER_URL = "http://192.168.1.4:3000"
     // For Android Emulator use: "http://10.0.2.2:3000"
     
     @Volatile

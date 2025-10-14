@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const { User, Chat, Message, Status } = require('../models');
+const { initializeWebRTCHandlers } = require('./webrtcHandler');
 
 // Store connected users
 const connectedUsers = new Map();
@@ -65,6 +66,9 @@ const socketHandler = (io) => {
       status: 'online',
       lastSeen: new Date()
     }).catch(error => console.error('Error updating user status:', error));
+
+    // Initialize WebRTC handlers for this user
+    initializeWebRTCHandlers(io, socket, socket.userId);
 
     // Join user to their chat rooms
     socket.emit('connected', {

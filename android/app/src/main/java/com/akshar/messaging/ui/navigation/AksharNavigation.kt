@@ -10,6 +10,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.foundation.layout.*
+import androidx.compose.ui.unit.dp
 import com.akshar.messaging.ui.auth.AuthViewModel
 import com.akshar.messaging.ui.screens.ModernHomeScreen
 import com.akshar.messaging.ui.screens.LoginScreen
@@ -37,6 +39,8 @@ import com.akshar.messaging.ui.home.HomeViewModel
 import com.akshar.messaging.utils.StorageUtil
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.asRequestBody
 
 @Composable
 fun AksharNavigation(
@@ -371,48 +375,159 @@ fun AksharNavigation(
         
         composable(Routes.MUSIC_STATUS) {
             val context = androidx.compose.ui.platform.LocalContext.current
+            val statusViewModel: com.akshar.messaging.ui.status.StatusViewModel = 
+                androidx.lifecycle.viewmodel.compose.viewModel()
+            
             MusicStatusScreen(
                 onNavigateBack = { navController.popBackStack() },
                 onPostMusicStatus = { title, artist, duration ->
-                    // TODO: Save music status to backend
-                    android.widget.Toast.makeText(
-                        context,
-                        "Music status posted successfully!",
-                        android.widget.Toast.LENGTH_SHORT
-                    ).show()
-                    navController.popBackStack()
+                    val token = com.akshar.messaging.utils.TokenManager.getBearerToken(context)
+                    if (token != null) {
+                        kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
+                            try {
+                                val statusRequest = com.akshar.messaging.data.models.StatusRequest(
+                                    type = "music",
+                                    content = "$title - $artist",
+                                    backgroundColor = "#1DB954",
+                                    fontFamily = "music"
+                                )
+                                
+                                val response = com.akshar.messaging.data.api.RetrofitClient
+                                    .statusApiService
+                                    .createStatus(token, statusRequest)
+                                
+                                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                                    if (response.isSuccessful) {
+                                        android.widget.Toast.makeText(
+                                            context,
+                                            "Music status posted!",
+                                            android.widget.Toast.LENGTH_SHORT
+                                        ).show()
+                                        navController.popBackStack()
+                                    } else {
+                                        android.widget.Toast.makeText(
+                                            context,
+                                            "Failed to post status",
+                                            android.widget.Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                            } catch (e: Exception) {
+                                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                                    android.widget.Toast.makeText(
+                                        context,
+                                        "Error: ${e.message}",
+                                        android.widget.Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        }
+                    }
                 }
             )
         }
         
         composable(Routes.LAYOUT_STATUS) {
             val context = androidx.compose.ui.platform.LocalContext.current
+            val statusViewModel: com.akshar.messaging.ui.status.StatusViewModel = 
+                androidx.lifecycle.viewmodel.compose.viewModel()
+            
             LayoutStatusScreen(
                 onNavigateBack = { navController.popBackStack() },
                 onPostLayoutStatus = { text, template ->
-                    // TODO: Save layout status to backend
-                    android.widget.Toast.makeText(
-                        context,
-                        "Layout status posted successfully!",
-                        android.widget.Toast.LENGTH_SHORT
-                    ).show()
-                    navController.popBackStack()
+                    val token = com.akshar.messaging.utils.TokenManager.getBearerToken(context)
+                    if (token != null) {
+                        kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
+                            try {
+                                val statusRequest = com.akshar.messaging.data.models.StatusRequest(
+                                    type = "layout",
+                                    content = text,
+                                    backgroundColor = template.name,
+                                    fontFamily = "layout"
+                                )
+                                
+                                val response = com.akshar.messaging.data.api.RetrofitClient
+                                    .statusApiService
+                                    .createStatus(token, statusRequest)
+                                
+                                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                                    if (response.isSuccessful) {
+                                        android.widget.Toast.makeText(
+                                            context,
+                                            "Layout status posted!",
+                                            android.widget.Toast.LENGTH_SHORT
+                                        ).show()
+                                        navController.popBackStack()
+                                    } else {
+                                        android.widget.Toast.makeText(
+                                            context,
+                                            "Failed to post status",
+                                            android.widget.Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                            } catch (e: Exception) {
+                                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                                    android.widget.Toast.makeText(
+                                        context,
+                                        "Error: ${e.message}",
+                                        android.widget.Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        }
+                    }
                 }
             )
         }
         
         composable(Routes.VOICE_STATUS) {
             val context = androidx.compose.ui.platform.LocalContext.current
+            val statusViewModel: com.akshar.messaging.ui.status.StatusViewModel = 
+                androidx.lifecycle.viewmodel.compose.viewModel()
+            
             VoiceStatusScreen(
                 onNavigateBack = { navController.popBackStack() },
                 onPostVoiceStatus = { audioPath, duration ->
-                    // TODO: Save voice status to backend
-                    android.widget.Toast.makeText(
-                        context,
-                        "Voice status posted successfully!",
-                        android.widget.Toast.LENGTH_SHORT
-                    ).show()
-                    navController.popBackStack()
+                    val token = com.akshar.messaging.utils.TokenManager.getBearerToken(context)
+                    if (token != null) {
+                        kotlinx.coroutines.CoroutineScope(kotlinx.coroutines.Dispatchers.IO).launch {
+                            try {
+                                val file = java.io.File(audioPath)
+                                val requestFile = file.asRequestBody("audio/*".toMediaTypeOrNull())
+                                val body = okhttp3.MultipartBody.Part.createFormData("audio", file.name, requestFile)
+                                
+                                val response = com.akshar.messaging.data.api.RetrofitClient
+                                    .statusApiService
+                                    .uploadAudio(token, body)
+                                
+                                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                                    if (response.isSuccessful) {
+                                        android.widget.Toast.makeText(
+                                            context,
+                                            "Voice status posted!",
+                                            android.widget.Toast.LENGTH_SHORT
+                                        ).show()
+                                        navController.popBackStack()
+                                    } else {
+                                        android.widget.Toast.makeText(
+                                            context,
+                                            "Failed to post status",
+                                            android.widget.Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                            } catch (e: Exception) {
+                                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) {
+                                    android.widget.Toast.makeText(
+                                        context,
+                                        "Error: ${e.message}",
+                                        android.widget.Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
+                        }
+                    }
                 }
             )
         }

@@ -81,10 +81,12 @@ class FirebaseMessagingService : FirebaseMessagingService() {
 
         val channelId = "akshar_messaging_channel"
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.mipmap.ic_launcher)
+            .setSmallIcon(R.drawable.ic_stat_notification) // Monochrome icon for status bar
+            .setColor(resources.getColor(R.color.akshar_primary, null)) // Brand color
             .setContentTitle(title)
             .setContentText(messageBody)
             .setAutoCancel(true)
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setContentIntent(pendingIntent)
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

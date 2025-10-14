@@ -668,4 +668,102 @@ router.get('/:chatId/messages', authMiddleware, requireChatParticipant, asyncHan
   });
 }));
 
+/**
+ * @route   PUT /api/chats/:chatId/mute
+ * @desc    Mute/unmute chat
+ * @access  Private
+ */
+router.put('/:chatId/mute', authMiddleware, requireChatParticipant, asyncHandler(async (req, res) => {
+    const { duration } = req.body; // duration in minutes, 0 to unmute
+    
+    const chat = await Chat.findById(req.params.chatId);
+    
+    chat.mutedBy = chat.mutedBy || new Map();
+    
+    if (duration && duration > 0) {
+        const muteUntil = new Date(Date.now() + duration * 60 * 1000);
+        chat.mutedBy.set(req.user._id.toString(), muteUntil);
+    } else {
+        chat.mutedBy.delete(req.user._id.toString());
+    }
+    
+    await chat.save();
+    
+    res.json({
+        success: true,
+        message: duration > 0 ? 'Chat muted' : 'Chat unmuted',
+        chat: chat.getFormattedChat(req.user._id)
+    });
+}));
+
+/**
+ * @route   DELETE /api/chats/:chatId
+ * @desc    Delete chat (soft delete for user)
+ * @access  Private
+ */
+router.delete('/:chatId', authMiddleware, requireChatParticipant, asyncHandler(async (req, res) => {
+    const chat = await Chat.findById(req.params.chatId);
+    
+    if (chat.isGroup) {
+        // Remove user from participants
+        chat.participants = chat.participants.filter(
+            p => p.toString() !== req.user._id.toString()
+        );
+        
+        // If no participants left, mark chat as deleted
+        if (chat.participants.length === 0) {
+            chat.isDeleted = true;
+        }
+    } else {
+        // For one-on-one chats, add to deletedFor array
+        chat.deletedFor = chat.deletedFor || [];
+        if (!chat.deletedFor.some(id => id.toString() === req.user._id.toString())) {
+            chat.deletedFor.push(req.user._id);
+        }
+        
+        // If both users deleted, mark chat as deleted
+        if (chat.deletedFor.length === chat.participants.length) {
+            chat.isDeleted = true;
+        }
+    }
+    
+    await chat.save();
+    
+    res.json({
+        success: true,
+        message: 'Chat deleted'
+    });
+}));
+
+/**
+ * @route   PUT /api/chats/:chatId/pin
+ * @desc    Pin/unpin chat
+ * @access  Private
+ */
+router.put('/:chatId/pin', authMiddleware, requireChatParticipant, asyncHandler(async (req, res) => {
+    const { pinned } = req.body;
+    
+    const chat = await Chat.findById(req.params.chatId);
+    
+    chat.pinnedBy = chat.pinnedBy || [];
+    
+    if (pinned) {
+        if (!chat.pinnedBy.some(id => id.toString() === req.user._id.toString())) {
+            chat.pinnedBy.push(req.user._id);
+        }
+    } else {
+        chat.pinnedBy = chat.pinnedBy.filter(
+            id => id.toString() !== req.user._id.toString()
+        );
+    }
+    
+    await chat.save();
+    
+    res.json({
+        success: true,
+        message: pinned ? 'Chat pinned' : 'Chat unpinned',
+        chat: chat.getFormattedChat(req.user._id)
+    });
+}));
+
 module.exports = router;

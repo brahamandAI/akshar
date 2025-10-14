@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 // import dagger.hilt.android.AndroidEntryPoint
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -35,20 +36,12 @@ class MainActivity : ComponentActivity() {
     private val authViewModel by lazy { AuthViewModel(application) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Install splash screen before super.onCreate()
+        installSplashScreen()
+        
         super.onCreate(savedInstanceState)
         
-        // Initialize token for testing (TEMPORARY - will be replaced with proper login)
-        com.akshar.messaging.utils.TokenManager.saveToken(
-            this,
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZThlMDUwMWU4ZWNjOGZjZTc4OTFhMSIsInVzZXJuYW1lIjoic3RhdHVzdGVzdCIsImVtYWlsIjoic3RhdHVzQHRlc3QuY29tIiwiaWF0IjoxNzYwMDkyMjQxLCJleHAiOjE3NjAxNzg2NDF9.oc6A2n8k85S9A0RNAV0tJjPnSRMXm0dr1jG_4Jn1B9I"
-        )
-        com.akshar.messaging.utils.TokenManager.saveUserInfo(
-            this,
-            "68e8e0501e8ecc8fce7891a1",
-            "statustest",
-            "status@test.com",
-            "Status Tester"
-        )
+        // No hardcoded token - will use proper authentication flow
         
         try {
             enableEdgeToEdge()
@@ -82,12 +75,25 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AksharApp(authViewModel: AuthViewModel) {
     val navController = rememberNavController()
+    var hasError by remember { mutableStateOf<String?>(null) }
 
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        AksharNavigation(
-            navController = navController,
-            authViewModel = authViewModel
-        )
+    LaunchedEffect(Unit) {
+        try {
+            // Simulate app initialization if needed
+        } catch (e: Exception) {
+            hasError = e.message
+        }
+    }
+
+    if (hasError != null) {
+        ErrorScreen(error = hasError ?: "Unknown Error")
+    } else {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            AksharNavigation(
+                navController = navController,
+                authViewModel = authViewModel
+            )
+        }
     }
 }
 

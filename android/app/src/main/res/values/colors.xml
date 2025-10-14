@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    <!-- Akshar Messaging Brand Colors -->
+    <color name="akshar_primary">#00BCD4</color>
+    <color name="akshar_primary_dark">#0097A7</color>
+    <color name="akshar_accent">#00E5FF</color>
+    <color name="akshar_background">#121212</color>
+    
+    <!-- Launcher Icon Background -->
+    <color name="ic_launcher_background">#1A1A1A</color>
 </resources>

@@ -199,6 +199,36 @@ const userSchema = new mongoose.Schema({
   },
   deletedAt: {
     type: Date
+  },
+  settings: {
+    theme: {
+      type: String,
+      enum: ['light', 'dark', 'auto'],
+      default: 'auto'
+    },
+    privacy: {
+      lastSeen: { type: Boolean, default: true },
+      profilePhoto: { type: Boolean, default: true },
+      status: { type: Boolean, default: true },
+      about: { type: Boolean, default: true }
+    },
+    notifications: {
+      messageNotifications: { type: Boolean, default: true },
+      groupNotifications: { type: Boolean, default: true },
+      callNotifications: { type: Boolean, default: true },
+      vibrate: { type: Boolean, default: true },
+      popupNotification: { type: Boolean, default: false }
+    },
+    chatSettings: {
+      enterIsSend: { type: Boolean, default: false },
+      mediaVisibility: { type: Boolean, default: true },
+      conversationTones: { type: Boolean, default: true },
+      chatBackup: { type: Boolean, default: false }
+    },
+    storageSettings: {
+      autoDownloadMedia: { type: Boolean, default: true },
+      downloadOverMobileData: { type: Boolean, default: false }
+    }
   }
 }, {
   timestamps: true,

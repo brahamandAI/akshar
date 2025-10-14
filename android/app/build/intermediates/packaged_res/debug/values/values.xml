@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="akshar_accent">#00E5FF</color>
+    <color name="akshar_background">#121212</color>
+    <color name="akshar_primary">#00BCD4</color>
+    <color name="akshar_primary_dark">#0097A7</color>
     <color name="black">#FF000000</color>
+    <color name="ic_launcher_background">#1A1A1A</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -22,16 +27,22 @@
     <string name="register">Register</string>
     <string name="username">Username</string>
     <string name="welcome_message">Welcome to Akshar Messaging</string>
-    <style name="Theme.AksharMessaging" parent="android:Theme.Light.NoTitleBar">
-        <item name="android:windowBackground">@color/white</item>
-        <item name="android:statusBarColor">@color/purple_700</item>
+    <style name="Theme.AksharMessaging" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/akshar_primary</item>
+        <item name="colorPrimaryDark">@color/akshar_primary_dark</item>
+        <item name="colorAccent">@color/akshar_accent</item>
+        <item name="android:statusBarColor">@color/akshar_background</item>
+        <item name="android:navigationBarColor">@color/akshar_background</item>
     </style>
-    <style name="Theme.AksharMessaging.Call" parent="android:Theme.Light.NoTitleBar">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
+    <style name="Theme.AksharMessaging.Call" parent="Theme.AksharMessaging">
+        <item name="android:windowBackground">@color/black</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    <style name="Theme.AksharMessaging.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/akshar_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_launcher</item>
+        <item name="windowSplashScreenAnimationDuration">1000</item>
+        <item name="postSplashScreenTheme">@style/Theme.AksharMessaging</item>
     </style>
 </resources>
