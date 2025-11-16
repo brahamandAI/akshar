@@ -246,10 +246,8 @@ userSchema.virtual('profileUrl').get(function() {
   return this.avatar ? this.avatar : `https://ui-avatars.com/api/?name=${encodeURIComponent(this.fullName)}&background=random`;
 });
 
-// Index for better query performance
-userSchema.index({ email: 1 });
-userSchema.index({ username: 1 });
-userSchema.index({ phoneNumber: 1 });
+// Indexes for better query performance
+// Note: unique fields (email, username, phoneNumber) already create indexes via `unique: true`
 userSchema.index({ status: 1 });
 userSchema.index({ lastSeen: -1 });
 

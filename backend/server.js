@@ -7,7 +7,16 @@ const helmet = require('helmet');
 const compression = require('compression');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
-require('dotenv').config();
+const dotenv = require('dotenv');
+
+// Load environment-specific config first (e.g. .env.development, .env.production), fallback to .env
+const NODE_ENV = process.env.NODE_ENV || 'development';
+const envFile = `.env.${NODE_ENV}`;
+const envResult = dotenv.config({ path: envFile });
+if (envResult.error) {
+  // Fallback to generic .env if specific file is missing
+  dotenv.config();
+}
 
 // Import routes
 const authRoutes = require('./src/routes/authRoutes');
@@ -124,10 +133,7 @@ app.use('*', (req, res) => {
 app.use(errorHandler);
 
 // Database connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/akshar_messaging', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/akshar_messaging')
 .then(() => {
   console.log('✅ Connected to MongoDB successfully');
 })

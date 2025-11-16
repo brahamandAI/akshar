@@ -407,7 +407,7 @@ messageSchema.statics.findChatMessages = function(chatId, options = {}) {
 };
 
 // Static method to search messages
-messageSchema.statics.searchMessages = function(userId, searchTerm, options = {}) {
+messageSchema.statics.searchMessages = async function(userId, searchTerm, options = {}) {
   const {
     limit = 20,
     skip = 0,
@@ -426,18 +426,27 @@ messageSchema.statics.searchMessages = function(userId, searchTerm, options = {}
   // Filter by chat
   if (chatId) {
     query.chatId = chatId;
+  } else {
+    // If no specific chatId is provided, limit search to chats where user is a participant
+    const Chat = mongoose.model('Chat');
+    const chats = await Chat.find({
+      participants: userId,
+      isActive: true,
+      isDeleted: false
+    }).select('_id');
+
+    const chatIds = chats.map(chat => chat._id);
+    // If user has no chats, short‑circuit to empty result
+    if (chatIds.length === 0) {
+      return [];
+    }
+
+    query.chatId = { $in: chatIds };
   }
 
   // Filter by type
   if (type && type !== 'all') {
     query.type = type;
-  }
-
-  // Filter by user's chats (user must be participant)
-  if (!chatId) {
-    query['$expr'] = {
-      $in: [userId, '$chat.participants']
-    };
   }
 
   return this.find(query)

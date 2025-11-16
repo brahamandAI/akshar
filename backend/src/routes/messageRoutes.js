@@ -3,7 +3,15 @@ const { body, validationResult } = require('express-validator');
 const { User, Chat, Message } = require('../models');
 const { authMiddleware, requireChatParticipant, asyncHandler, AppError } = require('../middleware');
 const multer = require('multer');
-const sharp = require('sharp');
+
+// Optional sharp dependency: if native bindings fail, log and continue without image metadata
+let sharp = null;
+try {
+  // eslint-disable-next-line global-require, import/no-extraneous-dependencies
+  sharp = require('sharp');
+} catch (error) {
+  console.warn('Sharp module not available; image metadata extraction disabled');
+}
 
 const router = express.Router();
 
@@ -31,6 +39,60 @@ const upload = multer({
     }
   }
 });
+
+/**
+ * @route   POST /api/messages/search
+ * @desc    Search messages
+ * @access  Private
+ *
+ * NOTE: This route MUST be registered before any parameterised routes like "/:chatId"
+ * to avoid Express treating "search" as a chatId and invoking chat participant middleware.
+ */
+router.post('/search', authMiddleware, [
+  body('searchTerm')
+    .trim()
+    .isLength({ min: 2 })
+    .withMessage('Search term must be at least 2 characters long'),
+  body('chatId')
+    .optional()
+    .isMongoId()
+    .withMessage('Invalid chat ID'),
+  body('type')
+    .optional()
+    .isIn(['text', 'image', 'video', 'audio', 'document', 'location', 'contact', 'all'])
+    .withMessage('Invalid message type')
+], asyncHandler(async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      success: false,
+      message: 'Validation failed',
+      errors: errors.array()
+    });
+  }
+
+  const { searchTerm, chatId, type = 'all', limit = 20, skip = 0 } = req.body;
+
+  const options = {
+    limit: parseInt(limit),
+    skip: parseInt(skip),
+    chatId,
+    type: type !== 'all' ? type : null
+  };
+
+  const messages = await Message.searchMessages(req.user._id, searchTerm, options);
+
+  res.json({
+    success: true,
+    data: {
+      messages,
+      total: messages.length,
+      limit: parseInt(limit),
+      skip: parseInt(skip),
+      searchTerm
+    }
+  });
+}));
 
 /**
  * @route   GET /api/messages/:chatId
@@ -247,8 +309,8 @@ router.post('/:chatId/media', authMiddleware, requireChatParticipant, upload.sin
     thumbnail: thumbnail
   };
 
-  // Extract dimensions for images
-  if (messageType === 'image') {
+  // Extract dimensions for images (only if sharp is available)
+  if (messageType === 'image' && sharp) {
     try {
       const metadata = await sharp(req.file.buffer).metadata();
       mediaMetadata.width = metadata.width;
@@ -630,57 +692,6 @@ router.post('/:messageId/read', authMiddleware, asyncHandler(async (req, res) =>
   res.json({
     success: true,
     message: 'Message marked as read'
-  });
-}));
-
-/**
- * @route   POST /api/messages/search
- * @desc    Search messages
- * @access  Private
- */
-router.post('/search', authMiddleware, [
-  body('searchTerm')
-    .trim()
-    .isLength({ min: 2 })
-    .withMessage('Search term must be at least 2 characters long'),
-  body('chatId')
-    .optional()
-    .isMongoId()
-    .withMessage('Invalid chat ID'),
-  body('type')
-    .optional()
-    .isIn(['text', 'image', 'video', 'audio', 'document', 'location', 'contact', 'all'])
-    .withMessage('Invalid message type')
-], asyncHandler(async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({
-      success: false,
-      message: 'Validation failed',
-      errors: errors.array()
-    });
-  }
-
-  const { searchTerm, chatId, type = 'all', limit = 20, skip = 0 } = req.body;
-
-  const options = {
-    limit: parseInt(limit),
-    skip: parseInt(skip),
-    chatId,
-    type: type !== 'all' ? type : null
-  };
-
-  const messages = await Message.searchMessages(req.user._id, searchTerm, options);
-
-  res.json({
-    success: true,
-    data: {
-      messages,
-      total: messages.length,
-      limit: parseInt(limit),
-      skip: parseInt(skip),
-      searchTerm
-    }
   });
 }));
 
